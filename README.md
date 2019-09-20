@@ -172,7 +172,7 @@ A program registered in the Windows service is executed as a server, which trans
 
 * the ftp server's file structure
 
-        /GoTest/과목코드/순번.mp4
+        /GoTest/cource_code/cource_number.mp4
         
 ## References
 
