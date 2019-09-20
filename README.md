@@ -2,7 +2,7 @@
 
 [![made-with-Go](https://img.shields.io/badge/Made%20with-Go-1f425f.svg)](https://golang.org/)
 
-윈도우 서비스에 등록된 프로그램이 서버 역할을 하여 웹 클라이언트의 자원을 이용해 영상을 트랜스코딩(인코딩)하고, 동시에 ftp 서버로 전송하는 기능을 한다. 
+A program registered in the Windows service is executed as a server, which transcodes (encodes) an video using the resources of a web client and transmits the video to a ftp server. 
 
 ## Browsers support
 
@@ -16,8 +16,7 @@
 
 ## Run
 
-1. 해당 프로그램을 실행시키기 위해서는 해당 라이브러리를 다운받아야 한다.
-
+1. To run the program, you need to download libraries.
 
     #### for service
 
@@ -32,17 +31,17 @@
     * [goftp/server](https://github.com/goftp/server) : ftp server for test
     
 
-2. ffmpeg.exe / ffprobe.exe를 server.go 디렉토리로 위치 변경
+2. Relocate ffmpeg.exe / ffprobe.exe to directory of server.go
 
-3. 테스트용 ftp server 실행
+3. Run your ftp server for testing
 
         exampleftpd -root /tmp
 
-4. ftp server 확인
+4. Check your ftp server's connection
 
         ftp > open localhost 2121
 
-5. sample.html의 웹소켓 연결 확인 
+5. Check your websocket connection of 'sample.html' 
 
 ## API Reference
 
@@ -54,7 +53,7 @@
 
 * default : localhost:5050
 
-* websocket
+* To connect websocket 
 
     * Request 
 
@@ -62,16 +61,16 @@
 
     * Progress Json Data
 
-        | Field            | Description                            | Optional   |
-        | ---------------- | ---------------------------------------| ---------- |
-        | `fileIndex`      | 파일 인덱스                             | no         |
-        | `fileName`       | 파일 이름                               | yes        |
-        | `progressTime`   | 현재 인코딩 진행된 시간                  | yes        |
-        | `progressStatus` | 인코딩 진행 상황 (continue / end)        | no        |
-        | `totalTime`      | 파일의 총 시간 길이                      | yes        |
-        | `progressRate`   | 인코딩 진행률 ( 00.00)                  | no         |
+        | Field            | Description                                | Optional   |
+        | ---------------- | -------------------------------------------| ---------- |
+        | `fileIndex`      | file index                                 | no         |
+        | `fileName`       | file name                                  | yes        |
+        | `progressTime`   | current encoding time                      | yes        |
+        | `progressStatus` | current encoding status (continue / end)   | no         |
+        | `totalTime`      | file total time                            | yes        |
+        | `progressRate`   | encoding progress rate ( 00.00)            | no         |
 
-* ftp 서버의 파일 존재 유무
+* To check a File existence of ftp server
 
     * Request
 
@@ -81,15 +80,15 @@
 
         | Field            | Description                            | Optional   |
         | ---------------- | ---------------------------------------| ---------- |
-        | `uploadFileName` | 확인할 파일의 명(인코딩된 파일명)         | no         |
-        | `courseCd`       | 과목코드                                | no         |
+        | `uploadFileName` | file name to check(encoded file name)   | no         |
+        | `courseCd`       | course code                            | no         |
 
     * Response
 
             Content-Type : text/plain;
-            exmaple : true(없음) / false(있음) / error
+            exmaple : true(not exist) / false(exist) / error
 
-* 트랜스코딩 요청
+* To requst encoding and uploading a file
 
     * Request
 
@@ -99,41 +98,41 @@
 
        - Form Data :
 
-            | Field          | Description                            | Optional   |
-            | -------------- | ---------------------------------------| ---------- |
-            | `uploadFileData` | 실제 파일 데이터                      | no        |
-            | `uploadFileInfo` | 'uploadFileData'의 정보               | no        |
-            | `uploadEncodingInfo`| 인코딩 정보                        | no        |
+            | Field               | Description                            | Optional   |
+            | ------------------- | ---------------------------------------| ---------- |
+            | `uploadFileData`    | file data                              | no         |
+            | `uploadFileInfo`    | information of 'uploadFileData'        | no         |
+            | `uploadEncodingInfo`| encoding information                   | no         |
 
        - 'uploadFileInfo' Json Data :
 
             | Field             | Description                               | Optional   |
             | ----------------- | ------------------------------------------| ---------- |
-            | `fileIndex`       | 요청 파일의 고유 인덱스                     | no         |
-            | `courseCd`        | 과목코드                                   | no         |
-            | `courseNo`        | 순번(파일명)                               | no         |
-            | `chapterNo`       | 장/절번호                                  | yes        |
-            | `courseName`      | 장/절명                                    | yes        |
-            | `courseDetailName`| 차시명                                     | yes        |
-            | `uploadFileName`  | 파일명 (순번 + 인코딩 확장자)                | no         |
-            | `uploadFileSize`  | 파일 사이즈                                 | yes        |
-            | `uploadFileExt`   | 기존 파일 확장자                            | yes        |
+            | `fileIndex`       | index                                     | no         |
+            | `courseCd`        | course code                               | no         |
+            | `courseNo`        | course number(file name)                  | no         |
+            | `chapterNo`       | chapter number                            | yes        |
+            | `courseName`      | course name                               | yes        |
+            | `courseDetailName`| course detail name                        | yes        |
+            | `uploadFileName`  | filename ('courseNo' + 'uploadFileExt')   | no         |
+            | `uploadFileSize`  | file size                                 | yes        |
+            | `uploadFileExt`   | filename extension                        | yes        |
 
        - 'uploadEncodingInfo' Json Data :
 
             | Field             | Description                               | Optional   |
             | ----------------- | ------------------------------------------| ---------- |
-            | `videoCodec`      | 비디오 코덱                                | no         |
-            | `videoBitrate`    | 비디오 비트레이트                           | no         |
-            | `audioCodec`      | 오디오 코덱                                | no         |
-            | `audioBitrate`    | 오디오 비트레이트                           | no        |
-            | `resolution`      | 해상도                                     | no        |
+            | `videoCodec`      | video codec                               | no         |
+            | `videoBitrate`    | video bitrate                             | no         |
+            | `audioCodec`      | audio codec                               | no         |
+            | `audioBitrate`    | audio bitrate                             | no         |
+            | `resolution`      | resolution                                | no         |
 
     * Response
 
             Content-Type : text/plain;
 
-* 트랜스코딩 중지
+* To stop trancoding
 
     * Request
 
@@ -143,14 +142,14 @@
 
             | Field          | Description                            | Optional   |
             | -------------- | ---------------------------------------| ---------- |
-            | `fileIndex`    | 삭제할 파일 인덱스                       | no        |
+            | `fileIndex`    | index                                  | no         |
 
     * Response
 
              Content-Type : text/plain;
              exmaple : true / false
 
-* 서비스 프로그램 실행 여부 체크
+* To check if service program is running
 
     * Request
 
@@ -164,12 +163,14 @@
 
 ## Notice
 
-* 서비스 실행되는 과정을 로그로 찍고 싶다면, Run() 안에서 Init() 호출
-* 웹의 파일 경로 보안이슈(fakepath)로 인해 기본 동작은 웹 클라이언트로부터 받은 데이터를 로컬에 저장한 후 이를 인코딩하여 ftp 서버로 전송한다. 그렇기 때문에 이 과정에서 로컬에 저장한 데이터와 인코딩 된 데이터를 지우는 과정이 필요하다.
-* 중지 기능은 인코딩 중에는 가능하지만, 업로딩 중에는 사용할 수 없다.
+* If you want to check logs, you must use Init() method in Run() method.
+* Due to the security issue(fakepath) on the web, the process will copy a stored data received from the web client, then encode it and send it to the ftp server.
+ Therefore, this process must need to delete a stored data and encoded data on local.
+* You can stop to encoding a file, but you can't stop during uploading.
 
 
-* ftp 서버의 파일 구조
+
+* the ftp server's file structure
 
         /GoTest/과목코드/순번.mp4
         
