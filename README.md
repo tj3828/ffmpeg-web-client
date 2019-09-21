@@ -31,7 +31,7 @@ A program registered in the Windows service is executed as a server, which trans
     * [goftp/server](https://github.com/goftp/server) : ftp server for test
     
 
-2. Relocate ffmpeg.exe / ffprobe.exe to directory of server.go
+2. Relocate ffmpeg.exe / ffprobe.exe to directory of main.go
 
 3. Run your ftp server for testing
 
