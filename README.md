@@ -176,7 +176,7 @@ A program registered in the Windows service is executed as a server, which trans
 
 
 
-* the ftp server's file structure
+* the ftp server's file structure is
 
         /GoTest/cource_code/cource_number.mp4
         
