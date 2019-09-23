@@ -170,6 +170,7 @@
                 if( recData.progressStatus == 'end') {
                     $("#uploadStopBtn_"+recData.fileIndex).css("display","none");
                     $('#progressStatus_'+recData.fileIndex).text("전송중")
+                    $('#progressBar_'+recData.fileIndex).css('width','100%')
                 } else {
                     $('#progressBar_'+recData.fileIndex).css('width',recData.progressRate+'%')
                     $('#progressStatus_'+recData.fileIndex).html(recData.progressRate + '% <br> (' + recData.timeRemaining + ' 남음)' ) 
