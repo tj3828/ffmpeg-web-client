@@ -8,6 +8,10 @@ A program registered in the Windows service is executed as a server, which trans
 
 - Added the function to display the remaining time.
 
+## Demo
+
+![화면](https://user-images.githubusercontent.com/43510811/65397175-d78cf080-dde8-11e9-96d5-d05b8f24a0a9.png)
+
 
 ## Browsers support
 
