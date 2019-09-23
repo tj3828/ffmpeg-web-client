@@ -70,14 +70,15 @@ A program registered in the Windows service is executed as a server, which trans
 
     * Progress Json Data
 
-        | Field            | Description                                | Optional   |
-        | ---------------- | -------------------------------------------| ---------- |
-        | `fileIndex`      | file index                                 | no         |
-        | `fileName`       | file name                                  | yes        |
-        | `progressTime`   | current encoding time                      | yes        |
-        | `progressStatus` | current encoding status (continue / end)   | no         |
-        | `totalTime`      | file total time                            | yes        |
-        | `progressRate`   | encoding progress rate ( 00.00)            | no         |
+        | Field            | Description                                    | Optional   |
+        | ---------------- | -----------------------------------------------| ---------- |
+        | `fileIndex`      | file index                                     | no         |
+        | `fileName`       | file name                                      | yes        |
+        | `progressTime`   | current encoding time                          | yes        |
+        | `progressStatus` | current encoding status (continue / end)       | no         |
+        | `totalTime`      | file total time                                | yes        |
+        | `timeRemaining`  | encoding time emaining (일, 시/ 분, 분/초, 초) | yes        |
+        | `progressRate`   | encoding progress rate ( 00.00)                | no         |
 
 * To check a File existence of ftp server
 
